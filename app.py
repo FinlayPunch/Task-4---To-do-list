@@ -4,13 +4,14 @@ import sqlalchemy
 
 app = Flask(__name__)
 
-@app.route('login')
-def home():
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/login')
+def login():
     return render_template('login.html')
 
-@app.route('/')
-def home():
-    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
