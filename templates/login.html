@@ -20,6 +20,7 @@
         <div class="row justify-content-center">
             <div class="col-md-5">
                 <div class="card mt-5" style="background: rgba(247, 36, 12, 0);">
+
                     <div class="card-header text-center" style="font-family: 'Lucida Console', Monaco, monospace; padding-top: 20px;">
                         <div class="d-flex justify-content-between align-items-center">
                             <h1>Login</h1>
@@ -35,16 +36,16 @@
                     <div class="card-body">
                         <form action="{{ url_for('login') }}" method="POST">
                             <div class="form-group">
-                                <label for="username">Username</label>
-                                <input style="background: rgba(131, 130, 130, 0.553); border: none;" type="text" class="form-control" id="username" name="username" required />
+                                <input style="background: rgba(131, 130, 130, 0.553); border: none; font-family: 'Lucida Console', Monaco, monospace;" type="text" class="form-control" id="username" name="username" placeholder="username" required />
                             </div>
                             <div class="form-group">
-                                <label for="password">Password</label>
-                                <input style="background: rgba(131, 130, 130, 0.553); border: none;" type="password" class="form-control" id="password" name="password" required />
+
+                                <input style="background: rgba(131, 130, 130, 0.553); border: none; font-family: 'Lucida Console', Monaco, monospace;" type="password" class="form-control" id="password" name="password" placeholder="password" required />
                             </div>
                             <button style="background: rgba(210, 206, 206, 0.651); border: none;" type="submit" class="btn btn-primary btn-block">Login</button>
                         </form>
                     </div>
+
                 </div>
             </div>
         </div>
