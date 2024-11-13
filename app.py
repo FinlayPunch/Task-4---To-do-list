@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, flash, session, redirect, url
 from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-from models import User
+from database.setup_db import User
 
 import sqlite3
 import sqlalchemy
@@ -21,10 +21,10 @@ def index():
 @app.route('/login', methods=["GET", "POST"])
 def login():
     if request.method == 'POST':
-        username = request.form.get['username']
-        password = request.form.get['password']
+        username = request.form.get('username')
+        password = request.form.get('password')
 
-        user = db_session.query(User).filter_by(username == username).first()
+        user = db_session.query(User).filter_by(username=username).first()
 
         if user and check_password_hash(user.password, password):
             session['user_id'] = user.id
