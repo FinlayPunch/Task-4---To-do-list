@@ -21,7 +21,7 @@ class ToDo(Base):
     task = Column(String, nullable=False)
     done = Column(Boolean, default=False)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-    user = relationship('User', back_='todos')
+    user = relationship('User', back_populates='todos')
 
 engine = create_engine('sqlite:///my_database.db')
 Base.metadata.create_all(engine)
