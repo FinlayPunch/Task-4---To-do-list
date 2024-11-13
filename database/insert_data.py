@@ -1,7 +1,7 @@
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from werkzeug.security import generate_password_hash
-from database.setup_db import User, ToDo
+from setup_db import User, ToDo
 
 engine = create_engine('sqlite:///todo.db')
 Session = sessionmaker(bind=engine)

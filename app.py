@@ -36,6 +36,11 @@ def login():
 
     return render_template('login.html')
 
+@app.route('/signup')
+def signup():
+    
+    return render_template('signup.html')
+
 @app.route('/dashboard')
 def dashboard():
     if 'user_id' not in session:
