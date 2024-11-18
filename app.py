@@ -1,16 +1,17 @@
 from flask import Flask, render_template, request, flash, session, redirect, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy.orm import sessionmaker
+from setup_db import User, ToDo
 from sqlalchemy import create_engine
-from database.setup_db import User
-
+import os
 import sqlite3
 import sqlalchemy
 
 app = Flask(__name__)
 app.secret_key = "sercet_key"
 
-engine = create_engine('sqlite:///your_database.db')
+
+engine = create_engine('sqlite:///my_database.db')
 Session = sessionmaker(bind=engine)
 db_session = Session()
 
