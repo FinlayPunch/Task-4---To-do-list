@@ -31,3 +31,17 @@ class ToDo(Base):
 engine = create_engine('sqlite:///my_database.db')  # Ensure consistent database
 Base.metadata.create_all(engine)  # Create tables if they don't exist
 print("Database and tables created")
+# Create a new session
+
+Session = sessionmaker(bind=engine)
+session = Session()
+
+def add_user(username, password):
+    hashed_password = generate_password_hash(password)
+    new_user = User(username=username, password=hashed_password)
+    session.add(new_user)
+    session.commit()
+    print(f"User {username} added to the database")
+
+# Example usage
+add_user('john_doe', 'mypassword123')

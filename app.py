@@ -3,9 +3,6 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy.orm import sessionmaker
 from setup_db import User, ToDo
 from sqlalchemy import create_engine
-import os
-import sqlite3
-import sqlalchemy
 
 app = Flask(__name__)
 app.secret_key = "sercet_key"
