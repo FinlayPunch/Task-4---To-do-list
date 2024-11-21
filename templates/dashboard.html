@@ -20,6 +20,15 @@
             </h1>
             <p><strong>User ID:</strong> {{ user_id }}</p>
             <p><strong>Username:</strong> {{ username }}</p>
+
+
+            <ul>
+                {% for todo in todos %}
+                    <li>{{ todo.task }}</li>
+                {% endfor %}
+            </ul>
+
+
             <a href='/logout'>
                 <button class="btn btn-primary">
                     Logout

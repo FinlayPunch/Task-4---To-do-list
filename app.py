@@ -3,9 +3,12 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy.orm import sessionmaker
 from setup_db import User, ToDo
 from sqlalchemy import create_engine
+import os
+import sqlite3
+import sqlalchemy
 
 app = Flask(__name__)
-app.secret_key = "sercet_key"
+app.secret_key = "secret_key"
 
 
 engine = create_engine('sqlite:///my_database.db')
@@ -44,8 +47,12 @@ def dashboard():
     if 'user_id' not in session:
         flash('You need to login first', 'warning')
         return redirect(url_for('login'))
+    
+    else:
+        user_id = session['user_id']
+        todos = db_session.query(ToDo).filter_by(user_id=user_id).all()
 
-    return render_template('dashboard.html', user_id=session["user_id"], username=session["username"])
+    return render_template('dashboard.html', user_id=session["user_id"], username=session["username"], todos = todos)
 
 
 if __name__ == '__main__':
