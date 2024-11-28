@@ -1,53 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Dashboard</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body style="background: linear-gradient(to right, rgb(34, 139, 34), rgb(255, 215, 0)); border: none;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card mt-5" style="background: rgba(255, 255, 255, 0.8);">
+                    <div class="card-header text-center" style="font-family: 'Lucida Console', Monaco, monospace;">
+                        <h1>Your To-Do List</h1>
+                    </div>
 
-    <body style="background: linear-gradient(to right, rgb(34, 139, 34), rgb(255, 215, 0)); border: none;">
-        <h1 style="font-family: 'Lucida Console', Monaco, monospace;">
-            Your To-Do List
-        </h1>
-        <!-- Form to Add a New To-Do -->
-        <form action="{{ url_for('add_todo') }}" method="POST">
-            <input style="font-family: 'Lucida Console', Monaco, monospace;" type="text" name="task" placeholder="New To-Do" required />
-            <button style="font-family: 'Lucida Console', Monaco, monospace;" type="submit">
-                Add
-            </button>
-        </form>
-        <!-- Display To-Do List -->
+                    <div class="card-body">
+                        <form action="{{ url_for('add_todo') }}" method="POST" class="mb-4">
+                            <div class="input-group">
+                                <input 
+                                    type="text" 
+                                    name="task" 
+                                    class="form-control" 
+                                    style="background: rgba(131, 130, 130, 0.553); border: none; font-family: 'Lucida Console', Monaco, monospace;" 
+                                    placeholder="New To-Do" 
+                                    required 
+                                />
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary" style="font-family: 'Lucida Console', Monaco, monospace;">Add</button>
+                                </div>
+                            </div>
+                        </form>
 
-        <p style="font-family: 'Lucida Console', Monaco, monospace;">
-            <strong>
-                User ID:
-            </strong> {{ user_id }}
-        </p>
+                        <p style="font-family: 'Lucida Console', Monaco, monospace;">
+                            <strong>User ID:</strong> {{ user_id }}
+                        </p>
+                        <p style="font-family: 'Lucida Console', Monaco, monospace;">
+                            <strong>Username:</strong> {{ username }}
+                        </p>
 
-        <p style="font-family: 'Lucida Console', Monaco, monospace;">
-            <strong>
-                Username:
-            </strong> {{ username }}
-        </p>
-
-
-        <ul style="font-family: 'Lucida Console', Monaco, monospace;">
-            {% for todo in todos %}
-            <li>
-                {{ todo.task }} 
-                {% if todo.done %}
-                <strong>(Completed)</strong>
-                {% else %}
-                <strong>(Pending)</strong>
-                {% endif %}
-    
-                <!-- Delete Button -->
-                <form action="{{ url_for('delete_todo', todo_id=todo.id) }}" method="POST" style="display:inline;">
-                    <button style="font-family: 'Lucida Console', Monaco, monospace;" type="submit">Delete</button>
-                </form>
-            </li>
-            {% endfor %}
-        </ul>
-    </body>
+                        <ul class="list-group">
+                            {% for todo in todos %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center" style="font-family: 'Lucida Console', Monaco, monospace;">
+                                {{ todo.task }} 
+                                {% if todo.done %}
+                                <span class="badge badge-success">Completed</span>
+                                {% else %}
+                                <span class="badge badge-warning">Pending</span>
+                                {% endif %}
+                                <form action="{{ url_for('delete_todo', todo_id=todo.id) }}" method="POST" style="margin-left: 10px;">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
