@@ -54,6 +54,38 @@ def dashboard():
 
     return render_template('dashboard.html', user_id=session["user_id"], username=session["username"], todos = todos)
 
+@app.route('/add_todo', methods=["POST"])
+def add_todo():
+    if "user_id" not in session:
+        flash("Please log in to add a to-do.", "warning")
+        return redirect(url_for('login'))
+    
+    task_description = request.form.get("task")
+    user_id = session["user_id"]
+
+    new_task = ToDo(task=task_description, user_id=user_id)
+    db_session.add(new_task)
+    db_session.commit()
+    flash("To-Do added successfully!", "success")
+    return redirect(url_for('dashboard'))
+
+@app.route('/delete_todo/<int:todo_id>', methods=["POST"])
+def delete_todo(todo_id):
+
+    if "user_id" not in session:
+        flash("Please log in to delete a to-do.", "warning")
+        return redirect(url_for('login'))
+
+    task = db_session.query(ToDo).get(todo_id)
+
+    if task and task.user_id == session["user_id"]:
+        db_session.delete(task)
+        db_session.commit()
+        flash("To-Do deleted successfully!", "success")
+    else:
+        flash("To-Do not found or access denied.", "danger")
+    return redirect(url_for('dashboard'))
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

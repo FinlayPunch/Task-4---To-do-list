@@ -1,38 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <title>
-            Dashboard
-        </title>
-
-        <link 
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
-        rel="stylesheet"
-        />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Dashboard</title>
     </head>
-    <body>
-        <div class="container mt-5">
-            <h1>
-                Welcome to the dashboard
-            </h1>
-            <p><strong>User ID:</strong> {{ user_id }}</p>
-            <p><strong>Username:</strong> {{ username }}</p>
+
+    <body style="background: linear-gradient(to right, rgb(34, 139, 34), rgb(255, 215, 0)); border: none;">
+        <h1 style="font-family: 'Lucida Console', Monaco, monospace;">
+            Your To-Do List
+        </h1>
+        <!-- Form to Add a New To-Do -->
+        <form action="{{ url_for('add_todo') }}" method="POST">
+            <input style="font-family: 'Lucida Console', Monaco, monospace;" type="text" name="task" placeholder="New To-Do" required />
+            <button style="font-family: 'Lucida Console', Monaco, monospace;" type="submit">
+                Add
+            </button>
+        </form>
+        <!-- Display To-Do List -->
+
+        <p style="font-family: 'Lucida Console', Monaco, monospace;">
+            <strong>
+                User ID:
+            </strong> {{ user_id }}
+        </p>
+
+        <p style="font-family: 'Lucida Console', Monaco, monospace;">
+            <strong>
+                Username:
+            </strong> {{ username }}
+        </p>
 
 
-            <ul>
-                {% for todo in todos %}
-                    <li>{{ todo.task }}</li>
-                {% endfor %}
-            </ul>
-
-
-            <a href='/logout'>
-                <button class="btn btn-primary">
-                    Logout
-                </button>
-            </a>
-        </div>
+        <ul style="font-family: 'Lucida Console', Monaco, monospace;">
+            {% for todo in todos %}
+            <li>
+                {{ todo.task }} 
+                {% if todo.done %}
+                <strong>(Completed)</strong>
+                {% else %}
+                <strong>(Pending)</strong>
+                {% endif %}
+    
+                <!-- Delete Button -->
+                <form action="{{ url_for('delete_todo', todo_id=todo.id) }}" method="POST" style="display:inline;">
+                    <button style="font-family: 'Lucida Console', Monaco, monospace;" type="submit">Delete</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
     </body>
+</html>
