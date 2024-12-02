@@ -2,12 +2,9 @@ from sqlalchemy import create_engine, Column, Integer, String, Boolean, ForeignK
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 from werkzeug.security import generate_password_hash, check_password_hash
-import os
 
-# Define the Base
 Base = declarative_base()
 
-# Define the User model
 class User(Base):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
@@ -18,33 +15,17 @@ class User(Base):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
-# Define the ToDo model
 class ToDo(Base):
     __tablename__ = 'todo'
     id = Column(Integer, primary_key=True)
     task = Column(String, nullable=False)
-    description = Column(String, nullable=True)  # New column for description
+    description = Column(String, nullable=True) 
     date = Column(String, nullable=True) 
     done = Column(Boolean, default=False)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     category = Column(String, nullable=False)
     user = relationship('User', back_populates='todos')
 
-# Database setup
-engine = create_engine('sqlite:///my_database.db')  # Ensure consistent database
-Base.metadata.create_all(engine)  # Create tables if they don't exist
+engine = create_engine('sqlite:///my_database.db')  
+Base.metadata.create_all(engine) 
 print("Database and tables created")
-# Create a new session
-
-# Session = sessionmaker(bind=engine)
-# session = Session()
-
-# def add_user(username, password):
-#     hashed_password = generate_password_hash(password)
-#     new_user = User(username=username, password=hashed_password)
-#     session.add(new_user)
-#     session.commit()
-#     print(f"User {username} added to the database")
-
-# # Example usage
-# add_user('john_doe', 'mypassword123')

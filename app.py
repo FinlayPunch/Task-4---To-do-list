@@ -3,9 +3,6 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy.orm import sessionmaker
 from setup_db import User, ToDo
 from sqlalchemy import create_engine
-import os
-import sqlite3
-import sqlalchemy
 
 app = Flask(__name__)
 app.secret_key = "secret_key"
@@ -40,15 +37,13 @@ def login():
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
-    # Get form data
         username = request.form.get("username")
         password = request.form.get("password")
-    # Check if the username already exists
         existing_user = db_session.query(User).filter_by(username=username).first()
         if existing_user:
             flash("Username already taken. Please choose another.", "danger")
             return redirect(url_for('signup'))
-        # Hash the password and create a new user
+
         hashed_password = generate_password_hash(password)
         new_user = User(username=username, password=hashed_password)
         db_session.add(new_user)
@@ -154,7 +149,7 @@ def toggle_done(todo_id):
 
     task = db_session.query(ToDo).get(todo_id)
     if task and task.user_id == session["user_id"]:
-        task.done = not task.done  # Toggle the done status
+        task.done = not task.done 
         db_session.commit()
         flash("Task status updated!", "success")
     else:
