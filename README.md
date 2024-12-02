@@ -1,4 +1,4 @@
-![im at the end of my rope tbh](https://github.com/FinlayPunch/Connections-Asessment/assets/150302225/40b9073f-a1ad-48e1-a05f-581b45bfe2e2)
+![image](https://github.com/user-attachments/assets/b703ecb0-6366-47f1-9697-a37306f58113)
 
 <h1>My task manager</h1>
 
@@ -7,7 +7,6 @@
 <b2>This is the task manager that I made for my Task 4 assessment for St Augustines students.
 </b2>
 
-![NYT-Connections-og-image](https://github.com/FinlayPunch/Connections-Asessment/assets/150302225/c8cc13db-3352-4103-aba9-5e9b0c4de8ec)
 
 <h1>Utilisation</h1>
 
@@ -21,8 +20,6 @@ You can check the tasks as completed once you have completed them<br><br>
 You are a able to edit or delete these tasks at any time.<br><br>
 </b2>
 
-![Screenshot 2024-04-01 123700](https://github.com/FinlayPunch/Connections-Asessment/assets/150302225/32cc0324-d346-4c6a-83ce-f99c55aa9058)
-
 <h1>How to set it up</h1>
 
 <b1>
@@ -33,7 +30,7 @@ You are a able to edit or delete these tasks at any time.<br><br>
 5. The database is created at the same time as the website.
 </b1>
 
-![Screenshot 2024-04-01 122113](https://github.com/FinlayPunch/Connections-Asessment/assets/150302225/f3423be5-2ef8-469a-9d1d-9cfca86cb6ac)
+![image](https://github.com/user-attachments/assets/4b4bb80c-bcad-4955-95b5-fa25fcbafbf9)
 
 <h1>Contributing</h1>
 
