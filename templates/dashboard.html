@@ -42,6 +42,12 @@
                                     {% else %}
                                     <span class="badge badge-warning">Pending</span>
                                     {% endif %}
+
+                                    <form action="{{ url_for('toggle_done', todo_id=todo.id) }}" method="POST" class="d-inline">
+                                        <label>
+                                            <input type="checkbox" name="done" onchange="this.form.submit()" {% if todo.done %}checked{% endif %}> Done
+                                        </label>
+                                    </form>
                                     <form action="{{ url_for('update_task', todo_id=todo.id) }}" method="GET" class="d-inline">
                                         <button type="submit" class="btn btn-info btn-sm">Update</button>
                                     </form>

@@ -146,6 +146,21 @@ def submit_update_task(todo_id):
         flash("Task not found or access denied.", "danger")
     return redirect(url_for('dashboard'))
 
+@app.route('/toggle_done/<int:todo_id>', methods=["POST"])
+def toggle_done(todo_id):
+    if "user_id" not in session:
+        flash("Please log in to update tasks.", "warning")
+        return redirect(url_for('login'))
+
+    task = db_session.query(ToDo).get(todo_id)
+    if task and task.user_id == session["user_id"]:
+        task.done = not task.done  # Toggle the done status
+        db_session.commit()
+        flash("Task status updated!", "success")
+    else:
+        flash("Task not found or access denied.", "danger")
+    
+    return redirect(url_for('dashboard'))
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
