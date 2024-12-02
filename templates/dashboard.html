@@ -6,61 +6,57 @@
     <title>Dashboard</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
 </head>
-<body style="background: linear-gradient(to right, rgb(34, 139, 34), rgb(255, 215, 0)); border: none;">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card mt-5" style="background: rgba(255, 255, 255, 0.8);">
-                    <div class="card-header text-center" style="font-family: 'Lucida Console', Monaco, monospace;">
-                        <h1>Your To-Do List</h1>
-                    </div>
+<body style="background: linear-gradient(to right, rgb(34, 139, 34), rgb(255, 215, 0)); border: none; height: 100vh;">
 
-                    <div class="card-body">
-                        <button type="submit" class="btn btn-primary" style="font-family: 'Lucida Console', Monaco, monospace;">
-                            <a href="/addtask" style="color: white; text-decoration: none;">Add Task</a>
-                        </button>
+    <div class="d-flex h-100">
+        <!-- Sidebar -->
+        <div class="bg-light border-right p-4" style="width: 250px; background-color: black;">
+            <h3 class="text-center mb-4" style="font-family: 'Lucida Console', Monaco, monospace;">Menu</h3>
+            <p><strong>Logged in as</strong> {{ username }}</p>
+            <button class="btn btn-primary w-100 mb-3" style="font-family: 'Lucida Console', Monaco, monospace;">
+                <a href="/addtask" style="color: white; text-decoration: none;">Add Task</a>
+            </button>
+        </div>
 
-                        <p style="font-family: 'Lucida Console', Monaco, monospace;">
-                            <strong>User ID:</strong> {{ user_id }}
-                        </p>
-                        <p style="font-family: 'Lucida Console', Monaco, monospace;">
-                            <strong>Username:</strong> {{ username }}
-                        </p>
+        <!-- Main Content -->
+        <div class="flex-grow-1 p-4">
+            <div class="card" style="background: rgba(255, 255, 255, 0.8);">
+                <div class="card-header text-center" style="font-family: 'Lucida Console', Monaco, monospace;">
+                    <h1>Your To-Do List</h1>
+                </div>
 
-                        <ul class="list-group">
-                            {% for todo in todos %}
-                            <li class="list-group-item" style="font-family: 'Lucida Console', Monaco, monospace;">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h5>{{ todo.task }}</h5><br>
-                                        <p class="mb-1">
-                                            <strong>Description:</strong> {{ todo.description }}
-                                        </p>
-                                        <p class="mb-0">
-                                            <strong>Date:</strong> <i>{{ todo.date }}</i>
-                                        </p>
-                                        <p class="mb-0">
-                                            <strong>Category:</strong> {{ todo.category }}
-                                        </p>
-                                    </div>
-                                    <div class="text-right">
-                                        {% if todo.done %}
-                                        <span class="badge badge-success">Completed</span>
-                                        {% else %}
-                                        <span class="badge badge-warning">Pending</span>
-                                        {% endif %}
-                                        <form action="{{ url_for('delete_todo', todo_id=todo.id) }}" method="POST" class="mt-2">
-                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                        </form>
-                                    </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        {% for todo in todos %}
+                        <li class="list-group-item" style="font-family: 'Lucida Console', Monaco, monospace;">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h5>{{ todo.task }}</h5><br>
+                                    <p class="mb-1"><strong>Description:</strong> {{ todo.description }}</p>
+                                    <p class="mb-0"><strong>Date:</strong> <i>{{ todo.date }}</i></p>
+                                    <p class="mb-0"><strong>Category:</strong> {{ todo.category }}</p>
                                 </div>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
+                                <div class="text-right">
+                                    {% if todo.done %}
+                                    <span class="badge badge-success">Completed</span>
+                                    {% else %}
+                                    <span class="badge badge-warning">Pending</span>
+                                    {% endif %}
+                                    <form action="{{ url_for('update_task', todo_id=todo.id) }}" method="GET" class="d-inline">
+                                        <button type="submit" class="btn btn-info btn-sm">Update</button>
+                                    </form>
+                                    <form action="{{ url_for('delete_todo', todo_id=todo.id) }}" method="POST" class="mt-2">
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
+
 </body>
 </html>

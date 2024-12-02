@@ -114,6 +114,38 @@ def delete_todo(todo_id):
         flash("To-Do not found or access denied.", "danger")
     return redirect(url_for('dashboard'))
 
+@app.route('/update_task/<int:todo_id>', methods=["GET"])
+def update_task(todo_id):
+    if "user_id" not in session:
+        flash("Please log in to update a task.", "warning")
+        return redirect(url_for('login'))
+    
+    task = db_session.query(ToDo).get(todo_id)
+    if task and task.user_id == session["user_id"]:
+        return render_template('update_task.html', task=task)
+    else:
+        flash("Task not found or access denied.", "danger")
+        return redirect(url_for('dashboard'))
+
+
+@app.route('/submit_update_task/<int:todo_id>', methods=["POST"])
+def submit_update_task(todo_id):
+    if "user_id" not in session:
+        flash("Please log in to update a task.", "warning")
+        return redirect(url_for('login'))
+    
+    task = db_session.query(ToDo).get(todo_id)
+    if task and task.user_id == session["user_id"]:
+        task.task = request.form.get("task")
+        task.description = request.form.get("description")
+        task.date = request.form.get("date")
+        task.category = request.form.get("category")
+        db_session.commit()
+        flash("Task updated successfully!", "success")
+    else:
+        flash("Task not found or access denied.", "danger")
+    return redirect(url_for('dashboard'))
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
