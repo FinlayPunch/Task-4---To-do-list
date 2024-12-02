@@ -23,8 +23,11 @@ class ToDo(Base):
     __tablename__ = 'todo'
     id = Column(Integer, primary_key=True)
     task = Column(String, nullable=False)
+    description = Column(String, nullable=True)  # New column for description
+    date = Column(String, nullable=True) 
     done = Column(Boolean, default=False)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    category = Column(String, nullable=False)
     user = relationship('User', back_populates='todos')
 
 # Database setup

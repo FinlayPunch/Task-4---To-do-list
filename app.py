@@ -37,10 +37,26 @@ def login():
 
     return render_template('login.html')
 
-@app.route('/signup')
+@app.route('/signup', methods=["GET", "POST"])
 def signup():
-    
-    return render_template('signup.html')
+    if request.method == "POST":
+    # Get form data
+        username = request.form.get("username")
+        password = request.form.get("password")
+    # Check if the username already exists
+        existing_user = db_session.query(User).filter_by(username=username).first()
+        if existing_user:
+            flash("Username already taken. Please choose another.", "danger")
+            return redirect(url_for('signup'))
+        # Hash the password and create a new user
+        hashed_password = generate_password_hash(password)
+        new_user = User(username=username, password=hashed_password)
+        db_session.add(new_user)
+        db_session.commit()
+        
+        flash("Signup successful! Please log in.", "success")
+        return redirect(url_for('login'))
+    return render_template("signup.html")
 
 @app.route('/dashboard')
 def dashboard():
@@ -50,24 +66,36 @@ def dashboard():
     
     else:
         user_id = session['user_id']
-        todos = db_session.query(ToDo).filter_by(user_id=user_id).all()
+        todos = db_session.query(ToDo).filter_by(user_id=user_id).order_by(ToDo.date.asc()).all()
 
     return render_template('dashboard.html', user_id=session["user_id"], username=session["username"], todos = todos)
 
-@app.route('/add_todo', methods=["POST"])
-def add_todo():
+@app.route('/addtask')
+def add_task():
     if "user_id" not in session:
-        flash("Please log in to add a to-do.", "warning")
+        flash("Please log in to access this page.", "warning")
+        return redirect(url_for('login'))
+    return render_template('addtask.html')
+
+
+@app.route('/submit_task', methods=["POST"])
+def submit_task():
+    if "user_id" not in session:
+        flash("Please log in to add a task.", "warning")
         return redirect(url_for('login'))
     
-    task_description = request.form.get("task")
+    task_name = request.form.get("task")
+    description = request.form.get("description")
+    date = request.form.get("date")
     user_id = session["user_id"]
+    category = request.form.get("category")
 
-    new_task = ToDo(task=task_description, user_id=user_id)
+    new_task = ToDo(task=task_name, description=description, date=date, category=category, user_id=user_id)
     db_session.add(new_task)
     db_session.commit()
-    flash("To-Do added successfully!", "success")
+    flash("Task added successfully!", "success")
     return redirect(url_for('dashboard'))
+
 
 @app.route('/delete_todo/<int:todo_id>', methods=["POST"])
 def delete_todo(todo_id):
