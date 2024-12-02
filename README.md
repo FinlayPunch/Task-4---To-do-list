@@ -26,12 +26,15 @@ You are a able to edit or delete these tasks at any time.<br><br>
 <h1>How to set it up</h1>
 
 <b1>
-1. Clone the repository: https://github.com/FinlayPunch/Connections-Asessment.git<br><br>
+1. Clone the repository: https://github.com/FinlayPunch/Task-4---To-do-list.git<br><br>
 2. Navigate to whether you cloned the repository and open it in the IDE of your choice (Visual Studio Code perhaps).<br><br>
-3. Open the file in it called <b>Main Line.py</b>. All other files are archaic and served specific purposes early in development.<br><br>
-4. Run the file and play.<br><br>
+3. Open the file in it called <b>app.py</b>.<br><br>
+4. Run the file and wait for the web address to appear in the terminal. Paste the link into your browser.<br><br>
+5. The database is created at the same time as the website.
 </b1>
 
 ![Screenshot 2024-04-01 122113](https://github.com/FinlayPunch/Connections-Asessment/assets/150302225/f3423be5-2ef8-469a-9d1d-9cfca86cb6ac)
 
 <h1>Contributing</h1>
+
+All pull requests are welcome. If you desire any major changes you can contact me about them.
