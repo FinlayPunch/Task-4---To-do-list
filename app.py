@@ -34,6 +34,13 @@ def login():
 
     return render_template('login.html')
 
+@app.route('/logout', methods=["POST"])
+def logout():
+    session.pop('user_id', None)
+    session.pop('username', None)
+    flash("Logged out successfully!", "info")
+    return redirect(url_for('index'))
+
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
@@ -149,7 +156,7 @@ def toggle_done(todo_id):
 
     task = db_session.query(ToDo).get(todo_id)
     if task and task.user_id == session["user_id"]:
-        task.done = not task.done 
+        task.done = not task.done
         db_session.commit()
         flash("Task status updated!", "success")
     else:
