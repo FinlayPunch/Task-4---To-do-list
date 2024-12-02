@@ -7,31 +7,31 @@
     <title>Update Task</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
 </head>
-<body>
-    <div class="container mt-5">
+<body style="background: linear-gradient(to right, rgb(34, 139, 34), rgb(255, 215, 0)); border: none;">
+    <div style="font-family: 'Lucida Console', Monaco, monospace" class="container mt-5">
         <h1 class="text-center">Update Task</h1>
         <form action="{{ url_for('submit_update_task', todo_id=task.id) }}" method="POST" class="mt-4">
             <div class="form-group">
                 <label for="task">Task Name:</label>
-                <input type="text" id="task" name="task" value="{{ task.task }}" class="form-control" required />
+                <input style="background: rgba(131, 130, 130, 0.553); border: none;" type="text" id="task" name="task" value="{{ task.task }}" class="form-control" required />
             </div>
             <div class="form-group">
                 <label for="description">Description:</label>
-                <textarea id="description" name="description" class="form-control" required>{{ task.description }}</textarea>
+                <textarea style="background: rgba(131, 130, 130, 0.553); border: none;" id="description" name="description" class="form-control" required>{{ task.description }}</textarea>
             </div>
             <div class="form-group">
                 <label for="date">Date:</label>
-                <input type="date" id="date" name="date" value="{{ task.date }}" class="form-control" required />
+                <input style="background: rgba(131, 130, 130, 0.553); border: none;" type="date" id="date" name="date" value="{{ task.date }}" class="form-control" required />
             </div>
             <div class="form-group">
                 <label for="category">Category:</label>
-                <select id="category" name="category" class="form-control" required>
+                <select style="background: rgba(131, 130, 130, 0.553); border: none;" id="category" name="category" class="form-control" required>
                     <option value="School" {% if task.category == 'School' %}selected{% endif %}>School</option>
                     <option value="Co-curricular" {% if task.category == 'Co-curricular' %}selected{% endif %}>Co-curricular</option>
                     <option value="Miscellaneous" {% if task.category == 'Miscellaneous' %}selected{% endif %}>Miscellaneous</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-success">Update Task</button>
+            <button type="submit" class="btn btn-secondary">Update Task</button>
         </form>
     </div>
 </body>
