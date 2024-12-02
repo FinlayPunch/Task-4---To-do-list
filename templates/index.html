@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="icon" type="image/x-icon" href="/Favicon/favicon-32x32.png">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon-32x32.png') }}">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 
 <body style="background: linear-gradient(to right, rgb(34, 139, 34), rgb(255, 215, 0)); height: 100vh; display: flex; flex-direction: column; justify-content: space-between; margin: 0;">
 
     <header class="bg-dark text-white text-center p-4">
-        <h1 style="font-family: 'Lucida Console', Monaco, monospace;">To-Do</h1>
+        <h1 style="font-family: 'Lucida Console', Monaco, monospace;">Task Planner</h1>
     </header>
 
     <main class="d-flex justify-content-center align-items-center flex-grow-1">
